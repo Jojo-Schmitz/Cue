@@ -33,9 +33,11 @@
 function init () {
 }
 
-// loop through music making all notes and rests small and silent
+// loop through selection making all notes and rests small and silent
 
-function cue () {
+function run () {
+  if (typeof curScore === 'undefined')
+    return;
 
   var cursor       = new Cursor(curScore);
   var selectionEnd = new Cursor(curScore);
@@ -68,7 +70,7 @@ function cue () {
           var notes = chord.notes;
           for (var i = 0; i < notes; ++i) {
             var note = chord.note(i);
-            note.velocity = 0;
+            note.velocity = 1; // so the playback cursor keeps moving
           }
           chord.small = true;
         }
@@ -87,10 +89,6 @@ function cue () {
 
   curScore.endUndo();
 
-}
-
-function run () {
-  cue();
 }
 
 //---------------------------------------------------------
