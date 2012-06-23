@@ -37,7 +37,6 @@ function init () {
 
 function cue () {
 
-
   var cursor       = new Cursor(curScore);
   var selectionEnd = new Cursor(curScore);
 
@@ -56,27 +55,31 @@ function cue () {
 
   for (var staff = startStaff; staff < endStaff; ++staff) {
 
-    cursor.goToSelectionStart();
-    cursor.voice = 0;
-    cursor.staff = staff;
+    for (var voice = 0; voice < 4; ++voice) {
 
-    while (cursor.tick() < selectionEnd.tick()) {
+      cursor.goToSelectionStart();
+      cursor.staff = staff;
+      cursor.voice = voice;
 
-      if (cursor.isChord()) {
-        var chord = cursor.chord();
-        var notes = chord.notes;
-        for (var i = 0; i < notes; ++i) {
-          var note = chord.note(i);
-          note.velocity = 0;
+      while (cursor.tick() < selectionEnd.tick()) {
+
+        if (cursor.isChord()) {
+          var chord = cursor.chord();
+          var notes = chord.notes;
+          for (var i = 0; i < notes; ++i) {
+            var note = chord.note(i);
+            note.velocity = 0;
+          }
+          chord.small = true;
         }
-        chord.small = true;
-      }
-      else if (cursor.isRest()) {
-        var rest = cursor.rest();
-        rest.small = true;
-      }
+        else if (cursor.isRest()) {
+          var rest = cursor.rest();
+          rest.small = true;
+        }
 
-      cursor.next();
+        cursor.next();
+
+      }
 
     }
 
