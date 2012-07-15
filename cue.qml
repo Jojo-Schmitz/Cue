@@ -33,10 +33,10 @@ MuseScore {
    menuPath: 'Plugins.Cue Notes'
    onRun: {
       if (typeof curScore === 'undefined')
-	 Qt.quit();
+         Qt.quit();
 
-      var cursor       = curScore.newScore();
-      var selectionEnd = curScore.newScore();
+      var cursor       = curScore.newCursor();
+      var selectionEnd = curScore.newCursor();
 
       cursor.rewind(1); // start of selection
       selectionEnd.rewind(2); // end of selection
@@ -45,7 +45,7 @@ MuseScore {
       var endTrack   = selectionEnd.track;
 
       // must select something
-      if (cursor.segment) { //?
+      if (!cursor.segment) { //?
          QMessageBox.warning(0,"Invalid Selection","Please select something and retry operation");
          Qt.quit();
       }
@@ -56,7 +56,7 @@ MuseScore {
 
          while (cursor.tick < selectionEnd.tick) {
             if (cursor.element && cursor.element.type == MScore.CHORD) {
-               var notes = cursor.elements.notes;
+               var notes = cursor.element.notes;
                for (var i = 0; i < notes.length; ++i) {
                   var note = notes[i];
                   note.veloOffset = 1; // so the playback cursor keeps moving
@@ -64,8 +64,8 @@ MuseScore {
                note.small = true;
             }
             else if (cursor.element && cursor.element.type == MScore.REST) {
-               var rest = cursor.elements.rest;
-               rest.small = true;
+               //var rest = cursor.element.rest;
+               //rest.small = true;
             }
 
             cursor.next();
