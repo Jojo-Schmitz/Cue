@@ -30,6 +30,8 @@ import QtQuick 1.0
 import MuseScore 1.0
 
 MuseScore {
+   version: "1.0"
+   description: "This plugin loopthrough selection making all notes and rests small and silent"
    menuPath: 'Plugins.Cue Notes'
    onRun: {
       if (typeof curScore === 'undefined')
