@@ -24,14 +24,14 @@
 //    This is ECMAScript code (ECMA-262 aka "Java Script")
 //
 
-// loop through selection making all notes and rests small and silent
+// loop through selection making all notes (and rests?) small and silent
 
 import QtQuick 1.0
 import MuseScore 1.0
 
 MuseScore {
    version: "1.0"
-   description: "This plugin loopthrough selection making all notes and rests small and silent"
+   description: "This plugin makes all notes and rests in selection small and silent"
    menuPath: 'Plugins.Cue Notes'
    onRun: {
       if (typeof curScore === 'undefined')
@@ -57,7 +57,7 @@ MuseScore {
          cursor.track = track;
 
          while (cursor.tick < selectionEnd.tick) {
-            if (cursor.element && cursor.element.type == MScore.CHORD) {
+            if (cursor.element && cursor.element.type == Element.CHORD) {
                var notes = cursor.element.notes;
                for (var i = 0; i < notes.length; ++i) {
                   var note = notes[i];
@@ -65,8 +65,8 @@ MuseScore {
                }
                note.small = true;
             }
-            else if (cursor.element && cursor.element.type == MScore.REST) {
-               //var rest = cursor.element.rest;
+            else if (cursor.element && cursor.element.type == Element.REST) {
+               var rest = cursor.element;
                //rest.small = true;
             }
 
