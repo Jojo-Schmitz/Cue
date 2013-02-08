@@ -46,28 +46,23 @@ MuseScore {
       var startTrack = cursor.track;
       var endTrack   = selectionEnd.track;
 
-      // must select something
-      if (!cursor.segment) { //?
-         QMessageBox.warning(0,"Invalid Selection","Please select something and retry operation");
-         Qt.quit();
-      }
-
       for (var track = startTrack; track < endTrack; ++track) {
          cursor.rewind(1); // start of selection
          cursor.track = track;
 
-         while (cursor.tick < selectionEnd.tick) {
+         while (cursor.segment && cursor.tick < selectionEnd.tick) {
             if (cursor.element && cursor.element.type == Element.CHORD) {
                var notes = cursor.element.notes;
+
                for (var i = 0; i < notes.length; ++i) {
                   var note = notes[i];
                   note.veloOffset = 1; // so the playback cursor keeps moving
+                  note.small = !(note.small);
                }
-               note.small = true;
             }
             else if (cursor.element && cursor.element.type == Element.REST) {
                var rest = cursor.element;
-               //rest.small = true;
+               //rest.small = !(rest.small);
             }
 
             cursor.next();

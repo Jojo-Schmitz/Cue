@@ -72,11 +72,11 @@ function run () {
             var note = chord.note(i);
             note.velocity = 1; // so the playback cursor keeps moving
           }
-          chord.small = true;
+          chord.small = !(chord.small);
         }
         else if (cursor.isRest()) {
           var rest = cursor.rest();
-          rest.small = true;
+          rest.small = !(rest.small);
         }
 
         cursor.next();
