@@ -26,22 +26,18 @@
 
 // loop through selection making all notes (and rests?) small and silent
 
-import QtQuick 2.0
+import QtQuick 1.0
 import MuseScore 1.0
 
 MuseScore {
    version: "1.0"
    description: "This plugin makes all notes and rests in selection small and silent"
    menuPath: 'Plugins.Cue Notes'
-   Cursor {
-      id: cursor
-      score: curScore
-   }
    onRun: {
       if (typeof curScore === 'undefined')
          Qt.quit();
 
-      //var cursor       = curScore.newCursor();
+      var cursor       = curScore.newCursor();
       var selectionEnd = curScore.newCursor();
 
       cursor.rewind(1); // start of selection
