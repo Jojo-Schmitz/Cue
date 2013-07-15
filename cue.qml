@@ -26,7 +26,7 @@
 
 // loop through selection making all notes (and rests?) small and silent
 
-import QtQuick 1.0
+import QtQuick 2.0
 import MuseScore 1.0
 
 MuseScore {
