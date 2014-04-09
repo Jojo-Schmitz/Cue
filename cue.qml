@@ -56,7 +56,8 @@ MuseScore {
 
                for (var i = 0; i < notes.length; ++i) {
                   var note = notes[i];
-                  note.veloOffset = 1; // so the playback cursor keeps moving
+                  //note.veloOffset = 1; // so the playback cursor keeps moving
+                  note.play = false;
                   note.small = !(note.small);
                }
             }
