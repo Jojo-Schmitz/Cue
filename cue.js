@@ -6,6 +6,7 @@
 //  Cue Notes plugin
 //
 //  Copyright (C)2008-2011 Werner Schweer and others
+//  Copyright (C)2013-2014 Joachim Schmitz
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -72,11 +73,11 @@ function run () {
             var note = chord.note(i);
             note.velocity = 1; // so the playback cursor keeps moving
           }
-          chord.small = !(chord.small);
+          chord.small = !(chord.small); // toggle
         }
         else if (cursor.isRest()) {
           var rest = cursor.rest();
-          rest.small = !(rest.small);
+          rest.small = !(rest.small); // toggle
         }
 
         cursor.next();

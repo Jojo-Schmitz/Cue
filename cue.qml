@@ -6,6 +6,7 @@
 //  Cue Notes plugin
 //
 //  Copyright (C)2008-2011 Werner Schweer and others
+//  Copyright (C)2013-2014 Joachim Schmitz
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,7 +27,7 @@
 
 // loop through selection making all notes (and rests?) small and silent
 
-import QtQuick 2.0
+import QtQuick 2.1
 import MuseScore 1.0
 
 MuseScore {
@@ -52,18 +53,23 @@ MuseScore {
 
          while (cursor.segment && cursor.tick < selectionEnd.tick) {
             if (cursor.element && cursor.element.type == Element.CHORD) {
+               //var chord = cursor.element;
+               // not (yet) available in the plugin framework, unlike 1.x
+               //chord.small = !(chord.small) // toggle
                var notes = cursor.element.notes;
 
                for (var i = 0; i < notes.length; ++i) {
                   var note = notes[i];
-                  //note.veloOffset = 1; // so the playback cursor keeps moving
-                  note.play = false;
-                  note.small = !(note.small);
+                  // make silent
+                  note.play = !(note.play); // toggle
+                  // won't be needed if chord.small were available
+                  note.small = !(note.small); // toggle
                }
             }
             else if (cursor.element && cursor.element.type == Element.REST) {
-               var rest = cursor.element;
-               //rest.small = !(rest.small);
+               //var rest = cursor.element;
+               // not (yet) available in the plugin framework, unlike 1.x
+               //rest.small = !(rest.small); // toggle
             }
 
             cursor.next();
