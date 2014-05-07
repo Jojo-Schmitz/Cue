@@ -53,23 +53,23 @@ MuseScore {
 
          while (cursor.segment && cursor.tick < selectionEnd.tick) {
             if (cursor.element && cursor.element.type == Element.CHORD) {
-               //var chord = cursor.element;
-               // not (yet) available in the plugin framework, unlike 1.x
-               //chord.small = !(chord.small) // toggle
                var notes = cursor.element.notes;
+               var chord = cursor.element;
 
                for (var i = 0; i < notes.length; ++i) {
                   var note = notes[i];
                   // make silent
                   note.play = !(note.play); // toggle
-                  // won't be needed if chord.small were available
-                  note.small = !(note.small); // toggle
+                  if (typeof chord.small === "undefined")
+                     note.small = !(note.small) // toggle
                }
+               if (typeof chord.small !== "undefined")
+                  chord.small = !(chord.small) // toggle
             }
             else if (cursor.element && cursor.element.type == Element.REST) {
-               //var rest = cursor.element;
-               // not (yet) available in the plugin framework, unlike 1.x
-               //rest.small = !(rest.small); // toggle
+               var rest = cursor.element;
+               if (typeof rest.small !== "undefined")
+                  rest.small = !(rest.small); // toggle
             }
 
             cursor.next();
