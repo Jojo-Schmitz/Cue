@@ -33,7 +33,7 @@ import MuseScore 1.0
 MuseScore {
    version: "1.0"
    description: "This plugin makes all notes and rests in selection small and silent"
-   menuPath: 'Plugins.Cue Notes'
+   menuPath: 'Plugins.Notes.Cue Notes'
    onRun: {
       if (typeof curScore === 'undefined')
          Qt.quit();

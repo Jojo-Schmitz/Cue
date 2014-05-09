@@ -98,7 +98,7 @@ function run () {
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.Cue Notes',
+      menu: 'Plugins.Notes.Cue Notes',
       init: init,
       run:  run
 }
