@@ -46,29 +46,36 @@ MuseScore {
 
       var startTrack = cursor.track;
       var endTrack   = selectionEnd.track;
+      var endTick = selectionEnd.tick;
+      if (endTick == 0) {
+            // selection contains last measure
+            endTick = curScore.lastSegment.tick + 1;
+      }
 
       for (var track = startTrack; track < endTrack; ++track) {
          cursor.rewind(1); // start of selection
          cursor.track = track;
 
-         while (cursor.segment && cursor.tick < selectionEnd.tick) {
+         while (cursor.segment && cursor.tick < endTick) {
             if (cursor.element && cursor.element.type == Element.CHORD) {
                var notes = cursor.element.notes;
                var chord = cursor.element;
 
                for (var i = 0; i < notes.length; ++i) {
                   var note = notes[i];
-                  // make silent
-                  note.play = !(note.play); // toggle
-                  if (typeof chord.small === "undefined")
-                     note.small = !(note.small) // toggle
+                  // make silent if selected
+                  if (note.selected) {
+                        note.play = !(note.play); // toggle
+                        if (typeof chord.small === "undefined")
+                              note.small = !(note.small) // toggle
+                  }
                }
-               if (typeof chord.small !== "undefined")
+               if (note.selected && typeof chord.small !== "undefined")
                   chord.small = !(chord.small) // toggle
             }
             else if (cursor.element && cursor.element.type == Element.REST) {
                var rest = cursor.element;
-               if (typeof rest.small !== "undefined")
+               if (rest.selected && typeof rest.small !== "undefined")
                   rest.small = !(rest.small); // toggle
             }
 
