@@ -48,8 +48,8 @@ MuseScore {
       var endTrack   = selectionEnd.track;
       var endTick = selectionEnd.tick;
       if (endTick == 0) {
-            // selection contains last measure
-            endTick = curScore.lastSegment.tick + 1;
+         // selection contains last measure
+         endTick = curScore.lastSegment.tick + 1;
       }
 
       for (var track = startTrack; track < endTrack; ++track) {
@@ -65,9 +65,9 @@ MuseScore {
                   var note = notes[i];
                   // make silent if selected
                   if (note.selected) {
-                        note.play = !(note.play); // toggle
-                        if (typeof chord.small === "undefined")
-                              note.small = !(note.small) // toggle
+                     note.play = !(note.play); // toggle
+                     if (typeof chord.small === "undefined")
+                        note.small = !(note.small) // toggle
                   }
                }
                if (note.selected && typeof chord.small !== "undefined")
