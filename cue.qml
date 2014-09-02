@@ -7,6 +7,7 @@
 //
 //  Copyright (C)2008-2011 Werner Schweer and others
 //  Copyright (C)2013-2014 Joachim Schmitz
+//  Copyright (C)2014 Jörn Eichler
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
